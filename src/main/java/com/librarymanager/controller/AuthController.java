@@ -29,7 +29,7 @@ public class AuthController {
 
     @PostMapping("/register")
     public String registerUser(User user) {
-        userService.saveUser(user);
+        userService.saveUser(user, null);
         return "redirect:/login";
     }
 }
