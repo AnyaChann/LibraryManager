@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <h2 class="text-center">Welcome, <span th:text="${user.username}">User</span></h2>
+    <p>Email: <span th:text="${user.email}">Email</span></p>
+    <p>Roles: <span th:each="role : ${user.roles}" th:text="${role.name}">Role</span></p>
+
+    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
+        <h3>Admin Features</h3>
+        <ul>
+            <li><a th:href="@{/admin/users}">Manage Users</a></li>
+            <li><a th:href="@{/admin/loans}">Manage Book Loans</a></li>
+        </ul>
+    </div>
+
+    <div th:if="${#authorization.expression('hasRole(''LIBRARIAN'')')}">
+        <h3>Librarian Features</h3>
+        <ul>
+            <li><a th:href="@{/librarian/books}">Manage Books</a></li>
+            <li><a th:href="@{/librarian/loans}">Manage Loan Requests</a></li>
+        </ul>
+    </div>
+
+    <div th:if="${#authorization.expression('hasRole(''READER'')')}">
+        <h3>Reader Features</h3>
+        <ul>
+            <li><a th:href="@{/books}">View Books</a></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

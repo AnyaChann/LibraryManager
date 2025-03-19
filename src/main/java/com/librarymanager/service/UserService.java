@@ -32,6 +32,10 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid user Id:" + id));
     }
 
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username).orElseThrow(() -> new IllegalArgumentException("Invalid username:" + username));
+    }
+
     public void saveUser(User user, List<Long> roleIds) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         Set<Role> roles = new HashSet<>(roleRepository.findAllById(roleIds));
