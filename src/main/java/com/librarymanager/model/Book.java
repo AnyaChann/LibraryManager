@@ -17,6 +17,17 @@ public class Book {
     private Date publishedDate;
     private boolean available;
 
+    private Date dueDate;
+
+    // Getters and setters for dueDate
+    public Date getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
+    }
+
     /**
      * @return Long return the id
      */

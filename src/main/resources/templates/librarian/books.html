@@ -9,7 +9,7 @@
 <body>
 <div class="container">
     <h2 class="text-center">Books</h2>
-    <a class="btn btn-primary mb-3" th:href="@{/books/new}">Add New Book</a>
+    <a class="btn btn-primary mb-3" th:href="@{/librarian/books/new}">Add New Book</a>
     <table class="table table-striped">
         <thead>
         <tr>
@@ -27,8 +27,8 @@
             <td th:text="${#dates.format(book.publishedDate, 'yyyy-MM-dd')}">Published Date</td>
             <td th:text="${book.available ? 'Yes' : 'No'}">Available</td>
             <td>
-                <a class="btn btn-warning btn-sm" th:href="@{/books/edit/{id}(id=${book.id})}">Edit</a>
-                <a class="btn btn-danger btn-sm" th:href="@{/books/delete/{id}(id=${book.id})}">Delete</a>
+                <a class="btn btn-warning btn-sm" th:href="@{/librarian/books/edit/{id}(id=${book.id})}">Edit</a>
+                <a class="btn btn-danger btn-sm" th:href="@{/librarian/books/delete/{id}(id=${book.id})}">Delete</a>
             </td>
         </tr>
         </tbody>

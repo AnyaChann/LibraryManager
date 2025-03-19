@@ -10,6 +10,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @Configuration
 @EnableWebSecurity
@@ -26,16 +27,20 @@ public class SecurityConfig {
         http
             .authorizeHttpRequests(authz -> authz
                 .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/librarian/**").hasRole("LIBRARIAN")
-                .requestMatchers("/reader/**").hasRole("READER")
+                .requestMatchers("/librarian/**").hasAnyRole("LIBRARIAN", "ADMIN")
+                .requestMatchers("/reader/**").hasAnyRole("READER", "ADMIN")
                 .anyRequest().authenticated()
             )
-            .formLogin()
-            .loginPage("/login")
-            .permitAll()
-            .and()
-            .logout()
-            .permitAll();
+            .formLogin(form -> form
+                .loginPage("/login")
+                .permitAll()
+            )
+            .logout(logout -> logout
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/login?logout")
+                .permitAll()
+                .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "GET"))
+            );
 
         return http.build();
     }
