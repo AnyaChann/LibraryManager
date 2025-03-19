@@ -1,33 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Book Loans</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">Manage Book Loans</h2>
-    <h3>Overdue Books</h3>
-    <table class="table table-striped">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+      <h2 class="text-center">Manage Book Loans</h2>
+      <h3>Overdue Books</h3>
+      <table class="table table-striped">
         <thead>
-        <tr>
+          <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Published Date</th>
             <th>Available</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${overdueBooks}">
+          <tr th:each="book : ${overdueBooks}">
             <td th:text="${book.title}">Title</td>
             <td th:text="${book.author}">Author</td>
-            <td th:text="${#dates.format(book.publishedDate, 'yyyy-MM-dd')}">Published Date</td>
+            <td th:text="${#dates.format(book.publishedDate, 'yyyy-MM-dd')}">
+              Published Date
+            </td>
             <td th:text="${book.available ? 'Yes' : 'No'}">Available</td>
-        </tr>
+          </tr>
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+  </body>
 </html>

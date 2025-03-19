@@ -1,35 +1,63 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Create User</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">Create User</h2>
-    <form th:action="@{/admin/users}" method="post" th:object="${user}">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+      <h2 class="text-center">Create User</h2>
+      <form th:action="@{/admin/users}" method="post" th:object="${user}">
         <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" th:field="*{username}" required>
+          <label for="username">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            th:field="*{username}"
+            required
+          />
         </div>
         <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" th:field="*{password}" required>
+          <label for="password">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            th:field="*{password}"
+            required
+          />
         </div>
         <div class="form-group">
-            <label for="email">Email</label>
-            <input type="email" class="form-control" id="email" th:field="*{email}" required>
+          <label for="email">Email</label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            th:field="*{email}"
+            required
+          />
         </div>
         <div class="form-group">
-            <label for="roles">Roles</label>
-            <select multiple class="form-control" id="roles" name="roleIds">
-                <option th:each="role : ${roles}" th:value="${role.id}" th:text="${role.name}">Role</option>
-            </select>
+          <label for="roles">Roles</label>
+          <select multiple class="form-control" id="roles" name="roleIds">
+            <option
+              th:each="role : ${roles}"
+              th:value="${role.id}"
+              th:text="${role.name}"
+            >
+              Role
+            </option>
+          </select>
         </div>
         <button type="submit" class="btn btn-primary btn-block">Save</button>
-    </form>
-</div>
-</body>
+      </form>
+    </div>
+  </body>
 </html>

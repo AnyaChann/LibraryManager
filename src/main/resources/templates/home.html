@@ -7,38 +7,11 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-<div class="container">
-    <h2 class="text-center">Welcome, <span th:text="${user.username}">User</span></h2>
-    <p>Email: <span th:text="${user.email}">Email</span></p>
-    <p>Roles: <span th:each="role : ${user.roles}" th:text="${role.name}">Role</span></p>
-
-    <a class="btn btn-secondary mb-3" th:href="@{/logout}">Logout</a>
-
-    <div th:if="${#authorization.expression('hasRole(''ADMIN'')')}">
-        <h3>Admin Features</h3>
-        <ul>
-            <li><a th:href="@{/admin/users}">Manage Users</a></li>
-            <li><a th:href="@{/admin/loans}">Manage Book Loans</a></li>
-            <li><a th:href="@{/librarian/books}">Manage Books</a></li>
-            <li><a th:href="@{/librarian/loans}">Manage Loan Requests</a></li>
-        </ul>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+        <h2 class="text-center">Welcome, <span th:text="${user.username}">User</span></h2>
+        <p>Email: <span th:text="${user.email}">Email</span></p>
+        <p>Roles: <span th:each="role : ${user.roles}" th:text="${role.name}">Role</span></p>
     </div>
-
-    <div th:if="${#authorization.expression('hasRole(''LIBRARIAN'') and !hasRole(''ADMIN'')')}">
-        <h3>Librarian Features</h3>
-        <ul>
-            <li><a th:href="@{/librarian/books}">Manage Books</a></li>
-            <li><a th:href="@{/librarian/loans}">Manage Loan Requests</a></li>
-        </ul>
-    </div>
-
-    <div th:if="${#authorization.expression('hasRole(''READER'') and !hasRole(''ADMIN'') and !hasRole(''LIBRARIAN'')')}">
-        <h3>Reader Features</h3>
-        <ul>
-            <li><a th:href="@{/reader/books}">View Books</a></li>
-            <li><a th:href="@{/reader/books/loans}">View Loan History</a></li>
-        </ul>
-    </div>
-</div>
 </body>
 </html>

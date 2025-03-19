@@ -1,41 +1,59 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Manage Loan Requests</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-</head>
-<body>
-<div class="container">
-    <h2 class="text-center">Manage Loan Requests</h2>
-    <table class="table table-striped">
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div th:replace="fragments/navbar :: navbar"></div>
+    <div class="container">
+      <h2 class="text-center">Manage Loan Requests</h2>
+      <table class="table table-striped">
         <thead>
-        <tr>
+          <tr>
             <th>Title</th>
             <th>Author</th>
             <th>Published Date</th>
             <th>Available</th>
             <th>Actions</th>
-        </tr>
+          </tr>
         </thead>
         <tbody>
-        <tr th:each="book : ${loanRequests}">
+          <tr th:each="book : ${loanRequests}">
             <td th:text="${book.title}">Title</td>
             <td th:text="${book.author}">Author</td>
-            <td th:text="${#dates.format(book.publishedDate, 'yyyy-MM-dd')}">Published Date</td>
+            <td th:text="${#dates.format(book.publishedDate, 'yyyy-MM-dd')}">
+              Published Date
+            </td>
             <td th:text="${book.available ? 'Yes' : 'No'}">Available</td>
             <td>
-                <form th:action="@{/librarian/loans/approve/{id}(id=${book.id})}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-success btn-sm">Approve</button>
-                </form>
-                <form th:action="@{/librarian/loans/reject/{id}(id=${book.id})}" method="post" style="display:inline;">
-                    <button type="submit" class="btn btn-danger btn-sm">Reject</button>
-                </form>
+              <form
+                th:action="@{/librarian/loans/approve/{id}(id=${book.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-success btn-sm">
+                  Approve
+                </button>
+              </form>
+              <form
+                th:action="@{/librarian/loans/reject/{id}(id=${book.id})}"
+                method="post"
+                style="display: inline"
+              >
+                <button type="submit" class="btn btn-danger btn-sm">
+                  Reject
+                </button>
+              </form>
             </td>
-        </tr>
+          </tr>
         </tbody>
-    </table>
-</div>
-</body>
+      </table>
+    </div>
+  </body>
 </html>
